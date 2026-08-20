@@ -1,0 +1,4 @@
+config dnsmasq
+    option port '53'
+    option noresolv '1'
+    option server '127.0.0.1#6053'
