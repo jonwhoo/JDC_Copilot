@@ -92,14 +92,16 @@ jobs:
           name: "JDCloud Arthur 固件发布 $(date +'%Y-%m-%d %H:%M')"
           body: |
             自动构建的京东云亚瑟固件（LibWrt main-nss）
-            - OpenClash 默认配置
-            - Passwall 默认配置
-            - SSR+ 默认配置
+            - OpenClash 默认配置（含订阅模板）
+            - Passwall 默认配置模板
+            - SSR+ 默认配置模板
             - SmartDNS 分流方案
             - TurboACC + NSS 加速
             - 已删除 rclone，固件更轻更稳
+            - 支持自动 DNS 分流、自动代理、自动加速
 
           files: |
             openwrt/bin/targets/*/*/*.bin
             openwrt/bin/targets/*/*/*.img
             openwrt/bin/targets/*/*/*.manifest
+
