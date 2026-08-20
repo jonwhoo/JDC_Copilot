@@ -31,6 +31,10 @@ jobs:
 
       - name: Clone LibWrt source
         run: |
+          git config --global advice.detachedHead false
+          git config --global http.postBuffer 524288000
+          git config --global http.maxRequestBuffer 1000M
+
           for i in {1..3}; do
             git clone --depth 1 -b main-nss https://github.com/LiBwrt/openwrt-6.x.git openwrt && break
             echo "Clone failed, retrying in 5 seconds..."
@@ -47,8 +51,6 @@ jobs:
             git fetch origin ${{ github.event.inputs.repo_commit }}
             git checkout ${{ github.event.inputs.repo_commit }}
           fi
-
-
 
       - name: Copy .config
         run: |
@@ -96,12 +98,15 @@ jobs:
           name: JDCloud-Arthur-.config
           path: openwrt/.config
 
+      - name: Set release date
+        run: echo "RELEASE_DATE=$(date +'%Y%m%d-%H%M')" >> $GITHUB_ENV
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         if: success()
         with:
-          tag_name: "Arthur-$(date +'%Y%m%d-%H%M')"
-          name: "JDCloud Arthur 固件发布 $(date +'%Y-%m-%d %H:%M')"
+          tag_name: "Arthur-${{ env.RELEASE_DATE }}"
+          name: "JDCloud Arthur 固件发布 ${{ env.RELEASE_DATE }}"
           body: |
             自动构建的京东云亚瑟固件（LibWrt main-nss）
             - OpenClash 默认配置（含订阅模板）
@@ -114,6 +119,4 @@ jobs:
 
           files: |
             openwrt/bin/targets/*/*/*.bin
-            openwrt/bin/targets/*/*/*.img
             openwrt/bin/targets/*/*/*.manifest
-
