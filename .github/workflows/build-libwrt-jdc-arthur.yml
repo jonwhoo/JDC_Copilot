@@ -1,4 +1,4 @@
-name: Build LibWrt JDCloud Arthur
+name: JDCloud Arthur Build
 
 on:
   workflow_dispatch:
