@@ -3,13 +3,11 @@
 
 # 确保在源码根目录执行
 if [ ! -f ".config" ]; then
-  echo "未找到 .config，请先拷贝 configs/arthur.config 到 openwrt/.config"
+  echo "未找到 .config，请先拷贝 arthur.config 到 openwrt/.config"
   exit 1
 fi
 
-# ================================
 # 1. 强制设置目标设备（京东云亚瑟）
-# ================================
 sed -i '/CONFIG_TARGET_ipq50xx/d' .config
 sed -i '/jdcloud_re-ss-01/d' .config
 
@@ -19,9 +17,7 @@ CONFIG_TARGET_ipq50xx_generic=y
 CONFIG_TARGET_ipq50xx_generic_DEVICE_jdcloud_re-ss-01=y
 EOF
 
-# ================================
-# 2. 强制启用三套代理插件
-# ================================
+# 2. 强制启用三套代理插件及依赖
 
 # ---- OpenClash ----
 sed -i '/luci-app-openclash/d' .config
@@ -62,9 +58,7 @@ CONFIG_PACKAGE_dns2socks=y
 CONFIG_PACKAGE_ipt2socks=y
 EOF
 
-# ================================
 # 3. NSS 加速（TurboACC 必备）
-# ================================
 sed -i '/kmod-qca-nss/d' .config
 cat >> .config <<EOF
 CONFIG_PACKAGE_kmod-qca-nss-ecm=y
@@ -73,14 +67,10 @@ CONFIG_PACKAGE_kmod-qca-nss-gmac=y
 CONFIG_PACKAGE_kmod-qca-nss-crypto=y
 EOF
 
-# ================================
-# 4. 可选系统微调（按需开启）
-# ================================
+# 4. 精简：删除 rclone 及其 WebUI/NG（其余包全部保留）
+sed -i '/luci-app-rclone/d' .config
+sed -i '/rclone-webui/d' .config
+sed -i '/rclone-ng/d' .config
+sed -i '/CONFIG_PACKAGE_rclone/d' .config
 
-# 修改默认 LAN IP（示例）
-# sed -i 's/192.168.1.1/192.168.31.1/g' package/base-files/files/bin/config_generate
-
-# 关闭不需要的服务（示例）
-# sed -i 's/ttyS0/ttyS1/g' package/base-files/files/etc/inittab
-
-echo "diy-part2.sh 已完成配置补全与修复。"
+echo "diy-part2.sh 已完成配置补全与精简。"
