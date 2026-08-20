@@ -1,9 +1,6 @@
 #!/bin/bash
 # 描述: 编译前引入第三方软件源 (Feeds)
 
-# 强制进入 openwrt 目录（最关键）
-cd openwrt || exit 1
-
 FEEDS_FILE="feeds.conf.default"
 
 # 先删除可能重复的源，避免重复添加导致冲突
