@@ -10,11 +10,11 @@ sed -i '/passwall$/d' $FEEDS_FILE
 sed -i '/helloworld/d' $FEEDS_FILE
 
 # 1. OpenClash（推荐 dev 分支）
-echo "src-git openclash https://github.com/vernesong/OpenClash.git;dev" >> $FEEDS_FILE
+echo "src-git openclash https://github.com/vernesong/OpenClash.git dev" >> $FEEDS_FILE
 
 # 2. PassWall 及其依赖包
-echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> $FEEDS_FILE
-echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git;main" >> $FEEDS_FILE
+echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git main" >> $FEEDS_FILE
+echo "src-git passwall https://github.com/xiaorouji/openwrt-passwall.git main" >> $FEEDS_FILE
 
 # 3. SSR+ (helloworld)
-echo "src-git helloworld https://github.com/fw876/helloworld.git;master" >> $FEEDS_FILE
+echo "src-git helloworld https://github.com/fw876/helloworld.git master" >> $FEEDS_FILE
