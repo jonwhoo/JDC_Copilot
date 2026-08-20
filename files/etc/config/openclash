@@ -1,1 +1,13 @@
+config openclash 'config'
+    option enable '1'
+    option config_path '/etc/openclash/config/default.yaml'
+    option ipv6_enable '0'
+    option dns_mode 'fake-ip'
+    option dashboard_password 'admin'
+    option cn_port '7892'
+    option proxy_port '7890'
+    option tproxy_port '7891'
 
+    # 订阅相关（机场自动导入模板，URL 请你自己改）
+    option config_auto '1'
+    option config_url 'https://your-airport-domain.com/path/to/clash.yaml'
