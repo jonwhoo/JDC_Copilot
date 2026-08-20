@@ -83,3 +83,23 @@ jobs:
         with:
           name: JDCloud-Arthur-.config
           path: openwrt/.config
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: success()
+        with:
+          tag_name: "Arthur-$(date +'%Y%m%d-%H%M')"
+          name: "JDCloud Arthur 固件发布 $(date +'%Y-%m-%d %H:%M')"
+          body: |
+            自动构建的京东云亚瑟固件（LibWrt main-nss）
+            - OpenClash 默认配置
+            - Passwall 默认配置
+            - SSR+ 默认配置
+            - SmartDNS 分流方案
+            - TurboACC + NSS 加速
+            - 已删除 rclone，固件更轻更稳
+
+          files: |
+            openwrt/bin/targets/*/*/*.bin
+            openwrt/bin/targets/*/*/*.img
+            openwrt/bin/targets/*/*/*.manifest
