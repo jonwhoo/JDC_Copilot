@@ -1,0 +1,14 @@
+config global
+    option global_server 'default_ssr'
+    option threads '1'
+    option tunnel_forward '8.8.8.8:53'
+
+config servers 'default_ssr'
+    option enabled '0'
+    option type 'ssr'
+    option server 'your-airport-host.com'
+    option server_port '443'
+    option password 'your-password'
+    option encrypt_method 'aes-256-cfb'
+    option protocol 'origin'
+    option obfs 'plain'
