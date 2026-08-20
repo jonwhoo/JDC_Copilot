@@ -27,7 +27,6 @@ jobs:
 
           sudo systemctl stop mysql || true
           sudo systemctl stop apache2 || true
-
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
 
       - name: Clone LibWrt source
@@ -42,7 +41,6 @@ jobs:
       - name: Copy .config
         run: |
           cd openwrt
-          mkdir -p ../configs
           cp ../arthur.config .config
 
       - name: Run diy-part1.sh (feeds)
